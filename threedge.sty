@@ -1,0 +1,174 @@
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{fontspec}
+
+\newlength{\cardwidth}
+\newlength{\cardheight}
+\newlength{\bleed}
+\newlength{\horizspace}
+\newlength{\vertspace}
+\newlength{\vertdist}
+\newlength{\horizdist}
+
+\setlength{\cardwidth}{2.5in}
+\setlength{\cardheight}{3.5in}
+\setlength{\bleed}{0.0625in}
+\setlength{\horizspace}{0.0625in}
+\setlength{\horizdist}{\cardwidth + 2\bleed + \horizspace}
+\setlength{\vertspace}{0.0625in}
+\setlength{\vertdist}{\cardheight + 2\bleed + \vertspace}
+
+\definecolor{offwhite}{HTML}{EBEBEB}
+\definecolor{offblack}{HTML}{30383B}
+\definecolor{offred}{HTML}{F25E4B}
+\definecolor{offblue}{HTML}{6FC0DE}
+\definecolor{offyellow}{HTML}{FAC957}
+\definecolor{offgray}{HTML}{899EA3}
+\definecolor{offgreen}{HTML}{9BC957}
+
+
+\tikzset{umbrella/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/umbrella.png}};
+}}
+
+\tikzset{bullseye/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bullseye.png}};
+}}
+
+\tikzset{volleyball/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/volleyball.png}};
+}}
+
+\tikzset{sun/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/sun.png}};
+}}
+
+\tikzset{recycling/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/recycling.png}};
+}}
+
+\tikzset{bicycle/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bicycle.png}};
+}}
+
+\tikzset{microscope/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/microscope.png}};
+}}
+
+\tikzset{leaf/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/leaf.png}};
+}}
+
+\tikzset{van/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/van.png}};
+}}
+
+\tikzset{earth/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/earth.png}};
+}}
+
+\tikzset{heart/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/heart.png}};
+}}
+
+\tikzset{tie/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/tie.png}};
+}}
+
+\tikzset{beaker/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/beaker.png}};
+}}
+
+\tikzset{storm/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/storm.png}};
+}}
+
+\tikzset{weight/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/weight.png}};
+}}
+
+\tikzset{flag/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/flag.png}};
+}}
+
+\tikzset{pingpong/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/pingpong.png}};
+}}
+
+\tikzset{female/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/female.png}};
+}}
+
+\tikzset{buoy/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/buoy.png}};
+}}
+
+\tikzset{male/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/male.png}};
+}}
+
+\tikzset{bullhorn/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bullhorn.png}};
+}}
+
+\tikzset{headphones/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/headphones.png}};
+}}
+
+\tikzset{balloon/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/balloon.png}};
+}}
+
+\tikzset{lightning/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/lightning.png}};
+}}
+
+\tikzset{suitcase/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/suitcase.png}};
+}}
+
+\tikzset{sailboat/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/sailboat.png}};
+}}
+
+\tikzset{fence/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/fence.png}};
+}}
+
+\tikzset{asterisk/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/asterisk.png}};
+}}
+
+\tikzset{battery/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/battery.png}};
+}}
+
+\tikzset{phone/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/phone.png}};
+}}
+
+\tikzset{luigi/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/luigi.png}};
+}}
+
+\tikzset{music/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/music.png}};
+}}
+
+\tikzset{wifi/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/wifi.png}};
+}}
+
+\tikzset{lock/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/lock.png}};
+}}
+
+\tikzset{snowflake/.pic={
+	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/snowflake.png}};
+}}
+
+\tikzset{token/.pic = {
+\node[draw, circle, minimum size=1.5in, inner sep=0pt, fill=offwhite] () at (0,0) {};
+\pic[scale=1.15] () at (0,0) {#1};
+}}
+
