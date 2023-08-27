@@ -1,6 +1,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
 \usepackage{fontspec}
+\usepackage{calc}
 
 \newlength{\cardwidth}
 \newlength{\cardheight}
@@ -26,149 +27,217 @@
 \definecolor{offgray}{HTML}{899EA3}
 \definecolor{offgreen}{HTML}{9BC957}
 
+\tikzset{guidecross/.pic={
+	\draw[#1] (-\bleed,0) -- (\bleed,0);
+	\draw[#1] (0, -\bleed) -- (0, \bleed);
+}}
 
+\tikzset{cutguide/.pic={
+	\pic () at (-\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (-\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+}}
+
+% Card Backs
+\tikzset{cardbackpattern/.pic={
+	\foreach \i in {-1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in}
+		\foreach \j in {-1.75in, -1.5in, -1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in, 1.5in, 1.75in}
+			\draw[ultra thick, black] (\i,\j) circle (0.105in);
+
+	\foreach \i in {-1.375in, -1.125in, -0.875in,-0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in}
+		\foreach \j in {-1.875in, -1.625in, -1.375in, -1.125in, -0.875in, -0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in, 1.625in, 1.875in}
+			\draw[ultra thick, black] (\i,\j) circle (0.105in);
+	\foreach \i in {-1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in}
+		\foreach \j in {-1.75in, -1.5in, -1.25in, -1.0in, -0.75in, -0.5in, -0.25in, 0in, 0.25in, 0.5in, 0.75in, 1.0in, 1.25in, 1.5in, 1.75in}
+			\draw[thick, #1] (\i,\j) circle (0.105in);
+
+	\foreach \i in {-1.375in, -1.125in, -0.875in,-0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in}
+		\foreach \j in {-1.875in, -1.625in, -1.375in, -1.125in, -0.875in, -0.625in, -0.375in, -0.125in, 0.125in, 0.375in, 0.625in, 0.875in, 1.125in, 1.375in, 1.625in, 1.875in}
+			\draw[thick, #1] (\i,\j) circle (0.105in);
+}}
+
+\tikzset{pics/cardbackprintable/.style n args={2}{
+	code={
+	\begin{scope}
+	\clip (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	% Pattern for card back
+	\path[fill=#1] (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	\pic () at (0,0) {cardbackpattern={#2}};
+	% Cutting guides for corners of the cards	
+	\pic () at (0,0) {cutguide={#1}};
+\end{scope}
+}}}
+
+%Card Fronts
 \tikzset{umbrella/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/umbrella.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/umbrella.png}};
 }}
 
 \tikzset{bullseye/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bullseye.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/bullseye.png}};
 }}
 
 \tikzset{volleyball/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/volleyball.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/volleyball.png}};
 }}
 
 \tikzset{sun/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/sun.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/sun.png}};
 }}
 
 \tikzset{recycling/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/recycling.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/recycling.png}};
 }}
 
 \tikzset{bicycle/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bicycle.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/bicycle.png}};
 }}
 
 \tikzset{microscope/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/microscope.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/microscope.png}};
 }}
 
 \tikzset{leaf/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/leaf.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/leaf.png}};
 }}
 
 \tikzset{van/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/van.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/van.png}};
 }}
 
 \tikzset{earth/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/earth.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/earth.png}};
 }}
 
 \tikzset{heart/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/heart.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/heart.png}};
 }}
 
 \tikzset{tie/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/tie.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/tie.png}};
 }}
 
 \tikzset{beaker/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/beaker.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/beaker.png}};
 }}
 
 \tikzset{storm/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/storm.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/storm.png}};
 }}
 
 \tikzset{weight/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/weight.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/weight.png}};
 }}
 
 \tikzset{flag/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/flag.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/flag.png}};
 }}
 
 \tikzset{pingpong/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/pingpong.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/pingpong.png}};
 }}
 
 \tikzset{female/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/female.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/female.png}};
 }}
 
 \tikzset{buoy/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/buoy.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/buoy.png}};
 }}
 
 \tikzset{male/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/male.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/male.png}};
 }}
 
 \tikzset{bullhorn/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/bullhorn.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/bullhorn.png}};
 }}
 
 \tikzset{headphones/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/headphones.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/headphones.png}};
 }}
 
 \tikzset{balloon/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/balloon.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/balloon.png}};
 }}
 
 \tikzset{lightning/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/lightning.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/lightning.png}};
 }}
 
 \tikzset{suitcase/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/suitcase.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/suitcase.png}};
 }}
 
 \tikzset{sailboat/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/sailboat.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/sailboat.png}};
 }}
 
 \tikzset{fence/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/fence.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/fence.png}};
 }}
 
 \tikzset{asterisk/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/asterisk.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/asterisk.png}};
 }}
 
 \tikzset{battery/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/battery.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/battery.png}};
 }}
 
 \tikzset{phone/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/phone.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/phone.png}};
 }}
 
 \tikzset{luigi/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/luigi.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/luigi.png}};
 }}
 
 \tikzset{music/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/music.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/music.png}};
 }}
 
 \tikzset{wifi/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/wifi.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/wifi.png}};
 }}
 
 \tikzset{lock/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/lock.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/lock.png}};
 }}
 
 \tikzset{snowflake/.pic={
-	\node[transform shape] at (0,0) {\includegraphics[scale=10]{Images/Icons/snowflake.png}};
+	\node[transform shape] at (0,0) {\includegraphics[scale=12.5]{Images/Icons/snowflake.png}};
 }}
 
-\tikzset{token/.pic = {
-\node[draw, circle, minimum size=1.5in, inner sep=0pt, fill=offwhite] () at (0,0) {};
-\pic[scale=1.15] () at (0,0) {#1};
-}}
 
+\tikzset{pics/cardfrontprintable/.style n args={4}{%
+	code={
+		\begin{scope}
+		\clip (-\cardwidth/2 - \bleed, 0in) --%
+		      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+		      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+		      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+		      cycle;
+
+		% Pattern for card front
+		\pic () at (0.5in,1.0in) {#1};
+		\pic () at (-0.5in,0.33in) {#2};
+		\pic () at (0.5in,-0.33in) {#3};
+		\pic () at (-0.5in,-1.0in) {#4};
+
+		\end{scope}
+		% Cutting guides for corners of the cards	
+		\pic () at (0,0) {cutguide={black}};
+}}}

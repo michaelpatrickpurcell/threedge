@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{threedge}
+
+\begin{document}
+\begin{tikzpicture}
+\path (-105mm,-148.5mm) rectangle (105mm,148.5mm);
+\pic at (-\horizdist,\vertdist) {cardbackprintable={white}{black}};
+\pic at (0,\vertdist) {cardbackprintable={white}{black}};
+\pic at (\horizdist,\vertdist) {cardbackprintable={white}{black}};
+
+\pic at (-\horizdist,0) {cardbackprintable={white}{black}};
+\pic at (0,0) {cardbackprintable={white}{black}};
+\pic at (\horizdist,0) {cardbackprintable={white}{black}};
+
+\pic at (-\horizdist,-\vertdist) {cardbackprintable={white}{black}};
+\pic at (0,-\vertdist) {cardbackprintable={white}{black}};
+\pic at (\horizdist,-\vertdist) {cardbackprintable={white}{black}};
+\end{tikzpicture}
+\end{document}

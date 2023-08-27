@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\usepackage{threedge}
+
+%1. Bullseye
+%2. Microscope
+%3. Sailboat
+%4. Earth
+%5. Battery
+%6. Van
+%7. Beaker
+%8. Umbrella
+%9. Bouy
+%10. Sun
+%11. Volleyball
+%12. Lightning	
+%13. Recycling
+%14. Bullhorn
+%15. Balloon
+%16. Leaf
+%17. Heart
+%18. Fence
+%19. Tie
+%20. Asterisk
+
+\begin{document}
+\begin{tikzpicture}
+\path (-105mm,-148.5mm) rectangle (105mm,148.5mm);
+\pic at (-\horizdist,\vertdist) {cardfrontprintable={bullseye}{microscope}{sailboat}{earth}};
+\pic at (0,\vertdist) {cardfrontprintable={van}{battery}{beaker}{bullseye}};
+\pic at (\horizdist,\vertdist) {cardfrontprintable={microscope}{umbrella}{battery}{buoy}};
+
+\pic at (-\horizdist,0) {cardfrontprintable={sailboat}{van}{umbrella}{sun}};
+\pic at (0,0) {cardfrontprintable={earth}{sun}{buoy}{beaker}};
+\pic at (\horizdist,0) {cardfrontprintable={volleyball}{bullseye}{lightning}{recycling}};
+
+\pic at (-\horizdist,-\vertdist) {cardfrontprintable={bullhorn}{volleyball}{balloon}{microscope}};
+\pic at (0,-\vertdist) {cardfrontprintable={lightning}{bullhorn}{leaf}{sailboat}};
+\pic at (\horizdist,-\vertdist) {cardfrontprintable={recycling}{leaf}{earth}{balloon}};
+\end{tikzpicture}
+\end{document}
